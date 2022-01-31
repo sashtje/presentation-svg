@@ -1,0 +1,666 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>SVG</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/gradient-dark.min.css">
+    <link rel="stylesheet" href="css/mycss.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>SVG</h1>
+
+          <aside class="notes">
+            Hello today I will be talking about SVG.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Today's topics:</h2>
+          <p class="fragment">SVG Intro</p>
+          <p class="fragment">Modes</p>
+          <p class="fragment">Coordinates</p>
+          <p class="fragment">Basic shapes</p>
+          <p class="fragment">Accessibility</p>
+          <p class="fragment">Animations</p>
+
+          <aside class="notes">
+            I'll tell you what SVG is, we'll also talk about different SVG modes, try to figure out with SVG Coordinate Systems, look at different basic shapes, we'll learn about accessibility, and also find out how we can animate SVG pictures.
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <h2>What is SVG?</h2>
+
+            <pre><code data-trim>
+<svg height="150" width="400">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="200" cy="70" rx="85" ry="55" fill="url(#grad3)" />
+
+  <text fill="#ffffff" font-size="45" font-family="Verdana" x="150" y="86">
+  SVG</text>
+</svg>
+            </code></pre>
+
+            <aside class="notes">
+              Ok, let's start. What is SVG?
+
+              SVG stands for Scalable Vector Graphics. It is an XML-based markup language for describing two-dimensional based vector graphics. 
+
+              This means they can be searched, indexed, scripted, and compressed. Additionally, this means they can be created and edited with any text editor or with drawing software.
+
+              SVG files come in two varieties. These are regular files with the extension .svg and compressed files in the format .svgz.
+
+              There are also special programs that can help optimize svg files. Because SVG files, especially those exported from various editors, usually contain a lot of redundant and useless information. This can include editor metadata, comments, hidden elements, default or non-optimal values and other stuff that can be safely removed or converted without affecting the SVG rendering result.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Some facts about SVG:</h2>
+
+            <ul>
+              <li class="fragment">W3C recommendation</li>
+              <li class="fragment">Integrates with the CSS, DOM, JS and SMIL</li>
+              <li class="fragment">Scalable</li>
+              <li class="fragment">Don't lose any quality if they are zoomed or resized</li>
+              <li class="fragment">Can be printed with high quality at any resolution</li>
+              <li class="fragment">Every element and every attribute in SVG files can be animated</li>
+            </ul>
+
+            <aside class="notes">
+              Some other facts about SVG.
+              SVG has been developed by the World Wide Web Consortium since 1999.
+
+              It designed specifically to work well with other web standards including CSS, DOM, JavaScript, and SMIL.
+              This means that the display (formatting and decoration) of SVG elements can be controlled using a stylesheet. SVG can be embedded in html document directly and every element and every attribute in SVG files can be animated. The animation is implemented in SVG using the SMIL (Synchronized Multimedia Integration Language) language, also developed by the World Wide Web Consortium. You can also manipulate SVG elements with JavaScript. Or animate it using keyframes.
+
+              Compared to classic bitmapped image formats such as JPEG or PNG, SVG-format vector images can be rendered at any size without loss of quality and as I say before, can be easily localized by updating the text within them, without the need of a graphical editor to do so.
+
+              Additionally, it is possible to apply filters to elements of an SVG document. 
+
+              The use of bitmap graphics in SVG documents is widely available. You can insert elements with PNG, GIF, or JPG images.
+
+              Text in an SVG graphic is text, not an image, so it can be selected and copied.
+
+              And SVG is supported by all modern browsers.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Disadvantages:</h2>
+
+            <ul>
+              <li class="fragment">No 3D graphics</li>
+              <li class="fragment">Large file size</li>
+              <li class="fragment">Difficult to use in large mapping applications</li>
+              <li class="fragment">More details - more size of svg data</li>
+            </ul>
+
+            <aside class="notes">
+              The disadvantages of SVG include:
+              - There is no support for 3D graphics at all.
+              - SVG inherits all the disadvantages of XML, such as a large file size.
+              - Difficult to use in large mapping applications due to the fact that in order to correctly display a small part of the image, the document must be read in its entirety.
+              - The more tiny details in the image, the faster the size of the SVG data grows.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>SVG Modes</h2>
+
+            <aside class="notes">
+              There are various ways that an SVG document fragment can be referenced by or included in other documents and then as a consequence be processed by a user agent.
+            </aside>
+          </section>
+
+          <section>
+            <img src="photos/inline-is-best.webp" alt="different modes">
+
+            <aside class="notes">
+              This picture shows three different ways to use svg in a document and we can see that if we use inline svg, we have all benefits only the image will not be in a separate file. If we use svg picture in an img tag, we lose the ability to interact with the image and access to it. If we use svg picture in an object or iframe tags, we won't be able to control this picture from outside.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Coordinates</h2>
+
+            <aside class="notes">
+              Coordinates
+            </aside>
+          </section>
+
+          <section>
+            <h2>Coordinate system:</h2>
+            <img src="photos/coordinate-system.jpg" alt="coordinate system">
+
+            <aside class="notes">
+              For all elements, SVG uses such coordinate system. That is, the top left corner of the document is considered to be the point (0,0), or point of origin. Positions are then measured in pixels from the top left corner, with the positive x direction being to the right, and the positive y direction being to the bottom.
+            </aside>
+          </section>
+
+          <section>
+            <h2>SVG attributes:</h2>
+
+            <ul>
+              <li class="fragment">viewport</li>
+              <li class="fragment">viewBox</li>
+              <li class="fragment">preserveAspectRatio</li>
+            </ul>
+
+            <aside class="notes">
+              To understand coordinates in svg we need to understand three of the most important SVG attributes that control coordinate systems:
+              viewport, viewBox and preserveAspectRatio.
+            </aside>
+          </section>
+
+          <section>
+            <h2>viewport</h2>
+
+            <pre><code data-trim>
+<!-- the viewport will be 800px by 600px -->
+<svg width="800" height="600">
+    <!-- SVG content drawn onto the SVG canvas -->
+</svg>
+            </code></pre>
+
+            <aside class="notes">
+              The viewport is the viewing area where the SVG will be visible (viewport coordinate system). The SVG viewport is similar to the viewport of the browser. A web page can be of any size; it can be wider than the viewport’s width, and is in most cases also longer than the viewport’s length. However, only portions of a web page are visible through the viewport at a time.
+
+              To specify the size of the viewport we need to use the width and height attributes on the outermost svg element.
+            </aside>
+          </section>
+
+          <section>
+            <p>viewBox syntax:</p>
+
+            <pre><code data-trim>
+viewBox = &lt;min-x&gt; &lt;min-y&gt; &lt;width&gt; &lt;height&gt;
+            </code></pre>
+
+            <aside class="notes">
+              Apart from the viewport coordinate system, there is also user coordinate system. This coordinate system is initially identical to the viewport coordinate system, but it can be modified with viewBox attribute. viewBox is the “real” coordinate system, it is used to draw the SVG graphics onto the canvas.
+
+              The viewBox attribute takes four parameters: the min-x and min-y values determine the upper left corner of the viewbox, and the width and height determine the width and height of that viewBox.
+            </aside>
+          </section>
+
+          <section>
+            <pre><code data-trim>
+<svg width="800" height="600" viewbox="0 0 400 300">
+  <!-- SVG content drawn onto the SVG canvas -->
+</svg>
+            </code></pre>
+            <div class="r-stretch" style="background-image: url('photos/viewbox-example.jpg');background-size: contain;background-repeat: no-repeat;background-position: center;"></div>
+
+            <aside class="notes">
+              On this slide we can see an example of viewport and viewBox together.
+              - viewBox specifies a specific region of the canvas spanning from a top left point at (0, 0) to a point at (400, 300).
+              - The SVG graphic is then cropped to that region.
+              - The region is scaled up to fill the entire viewport.
+              - The user coordinate system is mapped to the viewport coordinate system so that—in this case—one user unit is equal to two viewport units.
+            </aside>
+          </section>
+
+          <section>
+            <p>preserveAspectRatio syntax:</p>
+
+            <pre><code data-trim>
+              preserveAspectRatio = defer? &lt;align&gt; &lt;meetOrSlice&gt;?
+            </code></pre>
+
+            <aside class="notes">
+              The preserveAspectRatio attribute allows you to force uniform scaling of the viewbox, while maintaining the aspect ratio, and it allows you to specify how to position the viewbox inside the viewport if you don’t want it to be centered by default.
+
+              This is the official syntax for preserveAspectRatio. The defer argument is optional, and is used only when you’re applying preserveAspectRatio to an image tag. 
+              The align parameter indicates whether to force uniform scaling and, if so, the alignment method to use in case the aspect ratio of the viewBox doesn’t match the aspect ratio of the viewport.
+              The last argument, meetOrSlice is also optional. This argument specifies whether or not the entire viewBox should be visible inside the viewport.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Basic shapes</h2>
+
+            <aside class="notes">
+              There are several basic shapes used for most SVG drawing.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Rectangle</h2>
+
+            <pre><code data-trim>
+<svg width="400" height="180">
+  <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
+  style="fill:rgb(255, 179, 179);
+    stroke:rgb(116, 107, 102);stroke-width:5;" />
+</svg>
+            </code></pre>
+
+            <svg width="400" height="180">
+              <rect x="125" y="15" rx="20" ry="20" width="150" height="150"
+              style="fill:rgb(255, 179, 179);stroke:rgb(116, 107, 102);stroke-width:5;" />
+            </svg>
+
+            <aside class="notes">
+              The rect element is used to create a rectangle. The x and y attributes define the left and top positions of the rectangle, the width and height attributes define the width and the height of the rectangle. The rx and the ry attributes rounds the corners of the rectangle, the fill property defines the fill color of the rectangle, stroke-width defines the width of the border of the rectangle and the stroke defines the color of the border of the rectangle.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Circle</h2>
+
+            <pre><code data-trim>
+<svg height="300" width="300">
+  <circle cx="150" cy="150" r="100" stroke="rgb(116, 107, 102)" stroke-width="5" fill="rgb(255, 179, 179)" />
+</svg>
+            </code></pre>
+
+            <svg height="300" width="300">
+              <circle cx="150" cy="150" r="100" stroke="rgb(116, 107, 102)" stroke-width="5" fill="rgb(255, 179, 179)" />
+            </svg>
+
+            <aside class="notes">
+              To create a circle we need to use the circle element. The cx and cy attributes define the x and y coordinates of the center of the circle. If cx and cy are omitted, the circle's center is set to (0,0). The r attribute defines the radius of the circle.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Ellipse</h2>
+
+            <pre><code data-trim>
+<svg height="140" width="500">
+  <ellipse cx="200" cy="80" rx="100" ry="50"
+  style="fill:yellow;stroke:rgb(116, 107, 102);stroke-width:5" />
+</svg>
+            </code></pre>
+
+            <svg height="140" width="500">
+              <ellipse cx="200" cy="80" rx="100" ry="50"
+              style="fill:yellow;stroke:rgb(116, 107, 102);stroke-width:5" />
+            </svg>
+
+            <aside class="notes">
+              The ellipse element is used to create an ellipse. An ellipse is closely related to a circle. The difference is that an ellipse has an x and a y radius that differs from each other, while a circle has equal x and y radius.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Line</h2>
+
+            <pre><code data-trim>
+<svg height="210" width="500">
+  <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+</svg>
+            </code></pre>
+
+            <svg height="210" width="500">
+              <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+            </svg>
+
+            <aside class="notes">
+              To create a line we need to use the line element. The x1 attribute defines the start of the line on the x-axis. The y1 on the y-axis. The x2 and the y2 attributes defines the end of the line on the x and y-axis.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Polygon</h2>
+
+            <pre><code data-trim>
+<svg height="210" width="500">
+  <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:white;stroke-width:1" />
+</svg>
+            </code></pre>
+
+            <svg height="210" width="500">
+              <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:white;stroke-width:1" />
+            </svg>
+
+            <aside class="notes">
+              The polygon element is used to create a graphic that contains at least three sides. Polygons are made of straight lines, and the shape is "closed" (all the lines connect up).
+
+              The following example creates a polygon with three sides. The points attribute defines the x and y coordinates for each corner of the polygon.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Polyline</h2>
+
+            <pre><code data-trim>
+<svg height="180" width="500">
+  <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160"
+  style="fill:none;stroke:red;stroke-width:4" />
+</svg>
+            </code></pre>
+
+            <svg height="180" width="500">
+              <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160"
+              style="fill:none;stroke:red;stroke-width:4" />
+            </svg>
+
+            <aside class="notes">
+              The polyline element is used to create any shape that consists of only straight lines (that is connected at several points). The points attribute defines the list of points (pairs of x and y coordinates) required to draw the polyline.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Path</h2>
+
+            <ul>
+              <li>M = moveto</li>
+              <li>L = lineto</li>
+              <li>H = horizontal lineto</li>
+              <li>V = vertical lineto</li>
+              <li>C = curveto</li>
+              <li>S = smooth curveto</li>
+              <li>Q = quadratic Bézier curve</li>
+              <li>T = smooth quadratic Bézier curveto</li>
+              <li>A = elliptical Arc</li>
+              <li>Z = closepath</li>
+            </ul>
+
+            <aside class="notes">
+              A path is the most general shape that can be used in SVG. Using a path element, you can draw rectangles (with or without rounded corners), circles, ellipses, polylines, and polygons. Basically any of the other types of shapes, bezier curves, quadratic curves, and many more.
+              There is a set of commands that is available for path data.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Path example:</h2>
+
+            <pre><code data-trim>
+<svg height="300" width="400">
+  <path d="M20,100 Q100,305 250,200 T300,250" fill="none" stroke="blue" stroke-width="5"/>
+</svg>
+            </code></pre>
+
+            <svg height="300" width="400">
+              <path d="M20,100 Q100,305 250,200 T300,250" fill="none" stroke="blue" stroke-width="5"/>
+            </svg>
+
+            <aside class="notes">
+              Here is a path example.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Accessibility</h2>
+
+            <aside class="notes">
+              Accessibility.
+              Let's see how we can ensure a great user experience for everyone with SVG pictures.
+            </aside>
+          </section>
+
+          <section data-auto-animate>
+            <p>SVG as img src</p>
+
+            <pre data-id="code-animation"><code data-trim data-line-numbers>
+<img src="photos/owl.svg" alt="Harry Potter's owl">
+            </code></pre>
+
+            <aside class="notes">
+              For SVG in src of img tag we just need to fill alt attribute. But if we want to support users who still use older versions of Safari or iOS, we also need to add role="img".
+            </aside>
+          </section>
+
+          <section data-auto-animate>
+            <p>SVG as img src</p>
+
+            <pre data-id="code-animation"><code data-trim data-line-numbers>
+<img src="photos/owl.svg" alt="Harry Potter's owl" role="img">
+            </code></pre>
+
+            <aside class="notes">
+              This example is fine to use as just a basic image replacement, but it doesn’t allow for us to access to contents of the SVG for either Assistive technology or CSS/JS.
+            </aside>
+          </section>
+
+          <section>
+            <p>Inline SVG</p>
+
+            <pre><code data-trim data-line-numbers="2,3|1">
+<svg aria-labelledby="catTitle catDesc" role="img" version="1" id="cat" viewBox="0 0 720 800">
+  <title id="catTitle">Pixels, My Super-friendly Cat</title>
+  <desc id="catDesc">An illustrated gray cat with bright green blinking eyes.</desc>
+  <g>Here some shapes...</g>
+</svg>
+            </code></pre>
+
+            <aside class="notes">
+              Inlining the SVG provides more control because the SVG source is directly available in the DOM. If SVG does not contain any visible text that describes the graphic, we need to add the alternative text (invisible) by adding inside svg tag tag title and tag description. According to the W3C specification this is enough. But unfortunately, browser support is not quite there, so we need also add id's to the title and desc tags, and also add  aria-labelledby and role="img" into the svg tag.
+            </aside>
+          </section>
+
+          <section>
+            <p>Embed SVG via object or iframe</p>
+
+            <pre><code data-trim data-line-numbers="1">
+<object tabindex="0" type="image/svg+xml"
+    data="/path-to-the-svg/filename.svg" 
+    width="50%">
+  <img src="Fallback_image.jpg" alt="alt content here">
+</object>
+            </code></pre>
+
+            <pre><code data-trim data-line-numbers="1">
+<text id="nvda-title" style="font-size: 0;">A cute, gray cat with green eyes. Cat illustration by Heather Migliorisi.</text>
+            </code></pre>
+
+            <aside class="notes">
+              When we want to embed SVG via object or iframe we just need to add tabindex="0" to the object or the iframe tag, and to add a text element in the SVG that contains the content of title and possibly desc tag (for NVDA) and which is hidden.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Icons</h2>
+
+            <aside class="notes">
+              As for accessibility for Icons, icons can be divided into several classes.
+            </aside>
+          </section>
+
+          <section>
+            <p>Standalone Meaningful Icon</p>
+
+            <pre><code data-trim data-line-numbers="1,2">
+<svg role="img"> 
+  <title>Supports Mobile Devices</title>
+  <use xlink:href="#icon-phone"></use>
+</svg>
+            </code></pre>
+
+            <aside class="notes">
+              Standalone Meaningful Icon, these icons need alternative text. We need to add title text and role attribute to the svg tag.
+            </aside>
+          </section>
+
+          <section>
+            <p>Standalone Decorative Icon</p>
+
+            <pre><code data-trim data-line-numbers="1">
+<svg aria-hidden="true">
+  <title>checkmark</title>
+  <use xlink:href="#icon-checkmark"></use>
+</svg> 
+            </code></pre>
+
+            <aside class="notes">
+              Standalone Decorative Icon, these icons do not need alternative text and they should be hidden from the screen reader.
+            </aside>
+          </section>
+
+          <section>
+            <p>Linked Icon, no text</p>
+
+            <pre><code data-trim data-line-numbers="1">
+<a href="link" aria-label="See Picked Pens">
+  <svg> 
+    <use xlink:href="#icon-codepen"></use>
+  </svg>
+</a>
+            </code></pre>
+
+            <aside class="notes">
+              For linked icons that are not paired with text, we can use aria-label on the a element to provide descriptive, alternative text.
+            </aside>
+          </section>
+
+          <section>
+            <p>Linked Icon, with static text</p>
+
+            <pre><code data-trim data-line-numbers="1,5">
+<a href="link" aria-label="See Picked Pens">
+  <svg> 
+    <use xlink:href="#icon-codepen"></use>
+  </svg>
+  CodePen
+</a>
+            </code></pre>
+
+            <aside class="notes">
+              For linked icons that are paired with text, we also can use aria-label on the a element to provide descriptive, alternative text. With aria-label on the anchor tag, the screen reader does not announce the text inside of the link.
+            </aside>
+          </section>
+
+          <section>
+            <p>Linked Icon, with dynamic text</p>
+
+            <pre><code data-trim data-line-numbers="3">
+<a href="http://example.com" id="cart">
+  <span id="itemsInCart">0</span>
+  <span class="offscreen-text">items in your shopping cart</span>
+  <svg aria-hidden="true">
+    <use xlink:href="#icon-cart"></use>
+  </svg>
+</a>
+            </code></pre>
+
+            <aside class="notes">
+              In this case, let’s say we have a dynamic value in the linked text + the icon. Here, we should not use aria-label on the link because then the value of the dynamic text is lost. For this example, we can use spans and the off-screen text method. The numeric value in the span with id=”itemsInCart” is the dynamically added element.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Animations</h2>
+
+            <aside class="notes">
+              Animations. There are three different ways to animate SVG.
+            </aside>
+          </section>
+
+          <section>
+            <p>Animating with CSS @keyframes</p>
+
+            <pre><code data-trim data-line-numbers>
+<svg viewBox="0 0 127.9 178.4">
+  <path id="left-leg" d="M37.6,138.8c0 ... " />
+</svg>
+            </code></pre>
+
+            <pre><code data-trim data-line-numbers>
+.left-leg {
+  fill: orange;
+  animation: dance 2s infinite alternate;
+}
+
+@keyframes dance {
+  100% {
+    transform: rotate(3deg);
+  }
+}
+            </code></pre>
+
+            <aside class="notes">
+              SVG elements can be targeted and styled with CSS. Meaning, you can apply animation through @keyframes. Like in the example on the slide. This kind of animation is good for simple animations when we want to animate properties that CSS can animate.
+            </aside>
+          </section>
+
+          <section>
+            <p>Animating with SMIL</p>
+
+            <pre><code data-trim data-line-numbers>
+<svg viewBox="0 0 127.9 178.4">
+ <path d="M37.6,138.8c0 ... ">
+  <animate attributeName="fill" dur="5000ms" to="#f06d06" fill="freeze" />
+ </path>
+</svg>
+            </code></pre>
+
+            <aside class="notes">
+              Synchronized Multimedia Integration Language or SMIL is a syntax for animations built right into SVG. It is more powerful and can animate more things including the shape of the elements themselves.
+            </aside>
+          </section>
+
+          <section>
+            <p>Animating with JavaScript</p>
+
+            <ul>
+              <li>Snap.svg</li>
+              <li>SVG.js</li>
+              <li>D3.js</li>
+              <li>GreenSock</li>
+              <li>and others ...</li>
+            </ul>
+
+            <aside class="notes">
+              JavaScript can do everything what css and SMIL animations can do. So we can write animations by ourselves or use animation frameworks that work with SVG. These for example, Snap.js, SVG.js, D3.js, GreenSock and others.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <h2>Thank you for your attention!</h2>
+
+          <aside class="notes">
+            Thank you for your attention! Have a nice day!
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+      });
+    </script>
+  </body>
+</html>
